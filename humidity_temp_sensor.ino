@@ -8,8 +8,8 @@ DFRobot_DHT11 DHT;
 #include "ThingSpeak.h"
 #include <ESP8266WiFi.h>
 
-char ssid[] = "NunuaBundles";   // your network SSID (name) 
-char pass[] = "Keishtopher2021";   // your network password
+char ssid[] = "NunuaBundles";   // Change This to Your WiFi Network SSID (name) 
+char pass[] = "Keishtopher2021";   // WiFi network password
 WiFiClient  client;
 
 
