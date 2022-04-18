@@ -8,8 +8,8 @@ DFRobot_DHT11 DHT;
 #include "ThingSpeak.h"
 #include <ESP8266WiFi.h>
 
-char ssid[] = "NunuaBundles";   // Change This to Your WiFi Network SSID (name) 
-char pass[] = "Keishtopher2021";   // WiFi network password
+char ssid[] = "NunuaBundles";   // your network SSID (name) 
+char pass[] = "Keishtopher2021";   // your network password
 WiFiClient  client;
 
 
@@ -24,7 +24,9 @@ static const uint8_t D7 = 13;
 static const uint8_t D8 = 15;
 static const uint8_t D3 = 0;
 static const uint8_t D2 = 4;
+static const uint8_t D1 = 5;
 
+int fan = D1;
 int DHT11_PIN = D2;
 const int rs = D3, en = D8, d4 = D4, d5 = D5, d6 = D6, d7 = D7;
 
@@ -35,6 +37,7 @@ void setup(){
   // Initialise Serial Monitor & LCD screen
   lcd.begin(16,2);
   Serial.begin(115200);
+  pinMode(fan, OUTPUT);
   WiFi.mode(WIFI_STA);
   ThingSpeak.begin(client); // Initialize ThingSpeak
 }
@@ -92,6 +95,15 @@ void loop(){
   
   Serial.print("Temp = ");
   Serial.println(temp);
+
+  // Fan_Control
+  if (temp > 27) {
+    digitalWrite(fan, HIGH);
+  }
+  else if (temp < 27) {
+    digitalWrite(fan, LOW);
+  }
+
   
   // set the fields with the values
   ThingSpeak.setField(1, temp);
